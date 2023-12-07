@@ -1,91 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-  
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no">
-    <title>
-      (LMP) Local Media Player
-    </title>
-    <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/99320495">
-    <link rel="apple-touch-icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/99320495">
-    <style>
-      body { font-family: Arial, sans-serif; text-align: center; background-color:
-      #f1f1f1; } p { font-size: 17px; } #media-container { max-width: 800px;
-      margin: 0 auto; background-color: #333; border-radius: 10px; overflow:
-      hidden; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); } video { width: 100%;
-      height: auto; } input[type="file"] { display: none; } input[type="text"]
-      { width: 80%; padding: 10px; margin: 20px 0; border: 1px solid #ccc; border-radius:
-      5px; font-size: 16px; } label, button { display: inline-block; background-color:
-      #007BFF; color: #fff; padding: 10px 20px; border-radius: 5px; cursor: pointer;
-      margin: 10px; font-size: 16px; transition: background-color 0.3s ease;
-      } label:hover, button:hover { background-color: #0056b3; }
-    </style>
-  </head>
-  
-  <body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no">
+  <title>(LMP) Local Media Player</title>
+  <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/99320495">
+  <link rel="apple-touch-icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/99320495">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: url('https://cdn.discordapp.com/attachments/1182294906421645464/1182295005298184232/compresed.png') no-repeat center center fixed;
+      background-size: cover;
+      backdrop-filter: blur(2px);
+    }
+
+    p {
+      font-size: 17px;
+    }
+
+    #media-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      margin: 20px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    label,
+    button {
+      display: inline-block;
+      background-color: #343a40;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    label:hover,
+    button:hover {
+      background-color: #1d2124;
+    }
+  </style>
+</head>
+
+<body>
   <noscript async>
     <div style="border: 1px solid purple; padding: 10px">
       <span style="color:red">JavaScript is not enabled!</span>
       <META HTTP-EQUIV="Refresh" CONTENT="60;URL=">
     </div>
   </noscript>
-    <div id="media-container" style="display: none;">
-      <video id="media-player" controls autoplay>
-        Your browser does not support the media tag.
-      </video>
-    </div>
-    <input type="file" id="media-file" accept="all/*">
-    <label for="media-file">
-      Choose media
-    </label>
-    <br>
-    <p>
-      -- OR --
-    </p>
-    <br>
-    <input type="text" id="media-url" placeholder="Enter media URL">
-    <button id="play-url">
-      Play media from URL
-    </button>
-    <script async>
-      const mediaPlayer = document.getElementById('media-player');
-      const mediaFileInput = document.getElementById('media-file');
-      const mediaContainer = document.getElementById('media-container');
-      const playUrlButton = document.getElementById('play-url');
-      const mediaUrlInput = document.getElementById('media-url');
+  <div id="media-container" style="display: none;">
+    <video id="media-player" controls autoplay>
+      Your browser does not support the media tag.
+    </video>
+  </div>
+  <input type="file" id="media-file" accept="all/*">
+  <label for="media-file">Choose media</label>
+  <br>
+  <p>-- OR --</p>
+  <br>
+  <input type="text" id="media-url" placeholder="Enter media URL">
+  <button id="play-url">Play media from URL</button>
+  <script async>
+    const mediaPlayer = document.getElementById('media-player');
+    const mediaFileInput = document.getElementById('media-file');
+    const mediaContainer = document.getElementById('media-container');
+    const playUrlButton = document.getElementById('play-url');
+    const mediaUrlInput = document.getElementById('media-url');
 
-      mediaFileInput.addEventListener('change',
-      function() {
-        const file = mediaFileInput.files[0];
-        if (file) {
-          const objectURL = URL.createObjectURL(file);
-          mediaPlayer.src = objectURL;
-          mediaPlayer.play();
-          mediaContainer.style.display = 'block';
-        } else {
-          mediaContainer.style.display = 'none';
-        }
-      });
-
-      mediaPlayer.addEventListener('ended',
-      function() {
+    mediaFileInput.addEventListener('change', function() {
+      const file = mediaFileInput.files[0];
+      if (file) {
+        const objectURL = URL.createObjectURL(file);
+        mediaPlayer.src = objectURL;
+        mediaPlayer.play();
+        mediaContainer.style.display = 'block';
+      } else {
         mediaContainer.style.display = 'none';
-      });
+      }
+    });
 
-      playUrlButton.addEventListener('click',
-      function() {
-        const mediaUrl = mediaUrlInput.value;
-        if (mediaUrl) {
-          mediaPlayer.src = mediaUrl;
-          mediaPlayer.play();
-          mediaContainer.style.display = 'block';
-        } else {
-          mediaContainer.style.display = 'none';
-        }
-      });
-    </script>
-  </body>
+    mediaPlayer.addEventListener('ended', function() {
+      mediaContainer.style.display = 'none';
+    });
+
+    playUrlButton.addEventListener('click', function() {
+      const mediaUrl = mediaUrlInput.value;
+      if (mediaUrl) {
+        mediaPlayer.src = mediaUrl;
+        mediaPlayer.play();
+        mediaContainer.style.display = 'block';
+      } else {
+        mediaContainer.style.display = 'none';
+      }
+    });
+  </script>
+</body>
 
 </html>
